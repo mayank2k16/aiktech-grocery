@@ -36,6 +36,8 @@ import ScrollToTop from './v1/Components/ScrollToTop/ScrollToTop';
 import { AuthWrapper } from './v1/Wrapper/'
 import Carditems from './v1/Components/cardItems/CardItems';
 import TenantDashboard from './v1/Pages/TenantDashboard/TenantDashboard';
+import BuilderDash from './v1/Pages/Builder/BuilderDash';
+
 
 
 
@@ -47,7 +49,8 @@ function App() {
     <div className="AppRoot">
       <Provider store={store}>
           <Switch>
-          <Route path='/dashboard' render={()=>(<AuthWrapper><TenantDashboard/></AuthWrapper>)}/> 
+          <Route path='/dashboard' render={()=>(<AuthWrapper><TenantDashboard/></AuthWrapper>)}/>
+          <Route path='/builder' render={()=>(<AuthWrapper><BuilderDash/></AuthWrapper>)}/>
             <Route path="/">
               <Navigation />
               <ScrollToTop />
