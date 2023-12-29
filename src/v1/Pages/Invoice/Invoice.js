@@ -100,7 +100,7 @@ export default function Invoice(props) {
                     display:'none'
                 }}>
                     <InvoicePdfTemplate id={orderid} userDetails={auth.userDetails} 
-                     orderDetails={orderDetails} invoice={invoice}/>
+                     orderDetails={orderDetails} invoice={invoice} tenantDetails={auth.tenantDetails}/>
                 </div>
             </div>
             <div style={{

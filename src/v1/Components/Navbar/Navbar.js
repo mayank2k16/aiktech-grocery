@@ -84,6 +84,9 @@ const Navbar = (props) => {
   //     console.log("ERROR in Company API", error)
   //   }
   // };
+  useEffect( ()=>{
+    dispatch(actionsCreator.FETCH_TENANT_DETAILS());
+  },[])
 
   useEffect(() => {
     if (isLoggedIn) walletFetcher();
@@ -124,6 +127,7 @@ const Navbar = (props) => {
   const loginMenuBtn = useRef();
   useOutsideAlerter(clickOutsideProfile, "profile");
   useOutsideAlerter(clickOutsideLogin, "login", loginMenuBtn);
+  console.log(auth.tenantDetails,"tenant details in navbar");
 
   return (
     <nav className="navbar">
@@ -148,7 +152,7 @@ const Navbar = (props) => {
       <div className="bottom-container">
         <Link to="/">
             <div className="Logo">
-                <img src={logoImg} alt="Logo" />
+                <img src={auth.tenantDetails.logo} alt="Logo" />
               </div>
           
         </Link>
