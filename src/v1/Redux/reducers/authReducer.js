@@ -1,9 +1,10 @@
-import { SET_LOGIN, SHOW_LOGIN, SET_USER_DETAILS } from '../actions/actionTypes';
+import { SET_LOGIN, SHOW_LOGIN, SET_USER_DETAILS, SET_TENANT_DETAILS } from '../actions/actionTypes';
 
 const initialState = {
   isLoggedIn: false,
   showLoginPopup: false,
-  userDetails: {}
+  userDetails: {},
+  tenantDetails:{}
 };
 
 export default (state = initialState, { type, payload }) => {
@@ -24,6 +25,12 @@ export default (state = initialState, { type, payload }) => {
       return {
         ...state,
         userDetails: payload
+      }
+    }
+    case SET_TENANT_DETAILS: {
+      return {
+        ...state,
+        tenantDetails: payload
       }
     }
     default:

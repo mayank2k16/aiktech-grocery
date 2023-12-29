@@ -2,7 +2,7 @@ import './InvoicepdfTemplate.scss'
 import logoImg from "../../Assets/Images/navbar/new_logo.svg";
 
 
-const InvoicePdfTemplate = ({userDetails, id, orderDetails, invoice}) => {
+const InvoicePdfTemplate = ({userDetails, id, orderDetails, invoice, tenantDetails}) => {
 	const { data: invoiceDetails = {}, items: invoiceitem = [], final_delivery_charge = 0, packaging_charge = 0, promotional_discount, default_delivery_charge = 0 } = invoice || {}
     const { invoice_id, final_price = 0 } = invoiceDetails || {};
     return (
@@ -10,7 +10,7 @@ const InvoicePdfTemplate = ({userDetails, id, orderDetails, invoice}) => {
             <header className='flex-row items-between gap-10'>
                 <img src={logoImg} />
                 <h2>
-                    RealvalueMart
+                    {tenantDetails.title}
                 </h2>
             </header>
             <div>
@@ -46,6 +46,12 @@ const InvoicePdfTemplate = ({userDetails, id, orderDetails, invoice}) => {
                     </li>
                 </ul>
                 <ul className='ul-style-none'>
+                <li className='flex-row gap-10'>
+                        <span className='font-bold'>GST NO :</span>{tenantDetails.business_details && 
+                                                        tenantDetails.business_details.hasOwnProperty("gst")
+                                                        ? tenantDetails.business_details["gst"]
+                                                        : "N/A"}
+                    </li>
                     <li className='flex-row gap-10'>
                         <span className='font-bold'>Invoice No :</span>{invoice.data.invoice_id}
                     </li>

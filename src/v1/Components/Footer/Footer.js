@@ -29,9 +29,9 @@ const Footer = () => {
           <div className="footer-content footer-aboutus">
             <p className="footer-head">About Us</p>
             <p>
-              Real Value Mart has been delighting customers for years.
+            {auth.tenantDetails.title} has been delighting customers for years.
               Find the widest collection and get free delivery on every order.
-              Order through realvaluemart.in
+              Order through {auth.tenantDetails.custom_domain}
             </p>
           </div>
 
@@ -65,7 +65,7 @@ const Footer = () => {
                     target="_blank"
                     href="/privacy-policy#PhurtiDeliveryServices"
                   >
-                    Realvaluemart Delivery Services
+                    {auth.tenantDetails.title} Delivery Services
                   </a>
                 </li>
                 <li>
@@ -200,7 +200,7 @@ const Footer = () => {
         )}
       </div>
       <hr />
-      <p>© Realvaluemart { current_year }</p>
+      <p>© {auth.tenantDetails.title} { current_year }</p>
     </div>
   );
 };
