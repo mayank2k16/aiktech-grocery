@@ -1,0 +1,56 @@
+@import "../../../../v1/Assets/Styles/Variables.scss";
+
+.category-product{
+    margin-top: 1rem;
+}
+
+.category-subcategory{
+  // min-width: 60%;
+}
+
+.cat-sub-product{
+  max-width: 40%;
+}
+
+.cat-text-btn{
+  display: flex;
+  flex-direction: row;
+}
+
+@media #{$media-tablet} {
+  .cat-sub-product{
+    max-width: 20%;
+  }
+}
+
+@media #{media-mobile} {
+  .cat-text-btn{
+    flex-direction: column;
+  }
+}
+
+// TreView
+.caret {
+    cursor: pointer;
+    user-select: none; 
+  }
+  
+  .caret::before {
+    content: "\25B6";
+    color: black;
+    display: inline-block;
+    margin-right: 6px;
+  }
+  
+  .caret-down::before {
+    transform: rotate(90deg);
+  }
+  
+  .nested {
+    display: none;
+  }
+  
+  .active {
+    display: block;
+  }
+  

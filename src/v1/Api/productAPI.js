@@ -68,7 +68,9 @@ export const addProduct = (data) => {
   const url = `/shop/post/add_product/`;
   const params = {};
   const payload = { ...data };
-  return requestMaker(url, "post", { params, payload });
+  return requestMaker(url, "post", { params, payload },  {
+    'Content-Type': 'multipart/form-data'
+  });
 };
 
 export const addInventory = (data) => {
@@ -111,7 +113,7 @@ export const fetchInventories = (data) => {
 
 export const fetchleafcategory = (data) => {
   const { leaf } = data;
-  const url = `/shop/fetchcategories/?leaf=${leaf}`;
+  const url = `/shop/categories/leaf/`;
   const params = {};
   const payload = {};
   return requestMaker(url, "get", { params, payload });
@@ -119,10 +121,43 @@ export const fetchleafcategory = (data) => {
 
 export const fetchPagedProducts = (data) => {
   const { page , subCategoryName, subCategoryId } = data;
-  console.log(data,"data");
   if(!page) page=1
   const url = `/shop/products/Pagination/`;
   const params = {data};
   const payload = {};
   return requestMaker(url, "get", { params, payload });
 }
+
+export const editProduct = (data) => {
+  const getFormData = data => Object.keys(data).reduce((formData, key) => {
+    formData.append(key, data[key]);
+    return formData;
+}, new FormData());
+
+  const url = `/shop/tenant/products/`;
+  const params = {};
+  const payload = getFormData(data);
+  return requestMaker(url, "patch", { params, payload }, {
+    'Content-Type': 'multipart/form-data',
+  });
+};
+
+export const addSubCategory = (data) => {
+  const getFormData = data => Object.keys(data).reduce((formData, key) => {
+    formData.append(key, data[key]);
+    return formData;
+}, new FormData());
+  const url = `/shop/category/subcategory/`;
+  const params = {};
+  const payload = getFormData(data);
+  return requestMaker(url, "put", { params, payload },  {
+    'Content-Type': 'multipart/form-data',
+  });
+};
+
+export const fetchCategoryProducts = (data) => {
+  const url = `/shop/category/product/`;
+  const params = {  };
+  const payload = { ...data };
+  return requestMaker(url, "get", { params, payload });
+};

@@ -33,7 +33,7 @@ import { Provider } from 'react-redux';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import ScrollToTop from './v1/Components/ScrollToTop/ScrollToTop';
-import { AuthWrapper } from './v1/Wrapper/'
+import { AuthWrapper, AdminWrapper } from './v1/Wrapper/'
 import Carditems from './v1/Components/cardItems/CardItems';
 import TenantDashboard from './v1/Pages/TenantDashboard/TenantDashboard';
 
@@ -47,11 +47,11 @@ function App() {
     <div className="AppRoot">
       <Provider store={store}>
           <Switch>
-          <Route path='/dashboard' render={()=>(<AuthWrapper><TenantDashboard/></AuthWrapper>)}/> 
+          <Route path='/cms' render={()=>(<AuthWrapper><TenantDashboard/></AuthWrapper>)}/> 
             <Route path="/">
               <Navigation />
               <ScrollToTop />
-              <Switch>
+              <Switch> 
                 <Route exact path="/" component={Home} />
                 {/* <Route exact path="/comingsoon" component={Comingsoon} /> */}
                 <Route path="/categories/:category" component={() => (<AuthWrapper><Category /></AuthWrapper>)} />
@@ -76,7 +76,7 @@ function App() {
                 <Route path="/privacy-policy" component={Privacypolicy} />
                  {/* added */}
                         
-               <Route path='/orderItems' render={()=><Carditems/>}/>
+               <Route path='/orderItems' render={ ()=> <Carditems/> }/>
                 {/* <Route path="/aboutus" component={Aboutus} />
                 <Route path="/contactus" component={Contactus} /> */}
                 <Route path="*" component={Home} />

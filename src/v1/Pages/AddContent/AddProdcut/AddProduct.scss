@@ -1,0 +1,54 @@
+@import '../../../Assets/Styles/Variables.scss';
+
+
+// add-content-css
+.add-content-container{
+
+}
+
+.add-content-wrapper{
+
+}
+
+// .search-add-btn{
+//     justify-content: space-between;
+// }
+
+.search-tab input::placeholder{
+    font-size: 1rem;
+}
+
+.all-products-list-wrapper{
+    margin-top: 1rem;
+    padding: 0 10px;
+}
+
+.all-products-list{
+    height: 40rem;
+    padding: 0 10px;
+}
+
+.responsive-card{
+    width: 32%;
+    display: inline-block;
+    margin-right: 1%;
+    margin-bottom: 1%;
+}
+
+@media #{$media-tablet}{
+    .all-products-list-wrapper{
+        padding: 0 4px;
+    }
+
+    .responsive-card{
+        width: 48%;
+    }
+}
+
+@media #{$media-mobile}{
+    .responsive-card{
+        width: 100%;
+        margin-right: 0%;
+    }
+}
+
