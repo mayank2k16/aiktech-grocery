@@ -42,6 +42,7 @@ export default function Navigation() {
     };
 
     useEffect(() => {
+        dispatch(actionsCreator.FETCH_TENANT_DETAILS())
         if (isLoggedIn) {
             fetchUserDetails();
         }
