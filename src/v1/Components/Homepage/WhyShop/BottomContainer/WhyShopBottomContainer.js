@@ -9,8 +9,15 @@ import mobileStep2 from "../../../../Assets/Images/why shop with us/icon/mobile-
 import mobileStep3 from "../../../../Assets/Images/why shop with us/icon/mobile-step3.svg";
 import wave from "../../../../Assets/Images/why shop with us/icon/wave.svg";
 import WhyShopStepCardMobile from "./WhyShopStepCardMobile";
+import { useSelector } from "react-redux";
+
+const mapStateToProps = ({ auth  }) => ({
+  auth,
+});
+
 
 const WhyShopBottomContainer = () => {
+  const {auth} = useSelector(mapStateToProps);
   return (
     <div className="bottom-whyshop">
       <div className="whyshop-pc">
@@ -26,7 +33,7 @@ const WhyShopBottomContainer = () => {
             <WhyShopStepCard
               image={step2}
               number={2}
-              text="Order through Realvaluemart.in"
+              text={`Order through ${auth.tenantDetails?.custom_domain || auth.tenantDetails?.subdomain}`}
             />
             <WhyShopStepCard
               image={step3}
