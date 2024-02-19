@@ -1,4 +1,4 @@
-import { SET_LOGIN, SHOW_LOGIN, SET_USER_DETAILS } from '../actions/actionTypes';
+import { SET_LOGIN, SHOW_LOGIN, SET_USER_DETAILS,SET_TENANT_DETAILS } from '../actions/actionTypes';
 
 const initialState = {
   isLoggedIn: false,
@@ -24,6 +24,12 @@ export default (state = initialState, { type, payload }) => {
       return {
         ...state,
         userDetails: payload
+      }
+    }
+    case SET_TENANT_DETAILS: {
+      return {
+        ...state,
+        tenantDetails: payload
       }
     }
     default:
