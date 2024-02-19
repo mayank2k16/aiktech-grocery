@@ -20,14 +20,16 @@ import { useSelector } from "react-redux";
 import { getNearestInventory } from "../../Utils/general-utils";
 import useGeoLocation from "../../Hooks/useGeoLocation";
 
-const mapStateToProps = ({ inventory }) => ({
+const mapStateToProps = ({ inventory, auth }) => ({
   inventory,
+  auth
 });
 
 const Auth = (props) => {
   const {
     inventory: { list: inventoryList },
   } = useSelector(mapStateToProps);
+  const {auth} = useSelector(mapStateToProps)
 
   const [username, setUserName] = useState("");
   const [otpScreen, setOtpScreen] = useState(false);
@@ -358,11 +360,18 @@ const Auth = (props) => {
                 showErr={showErr}
                 loading={otpLoading}
               />
+
+                {
+                auth.tenantDetails?.template_configs[0]?.config?.home?.header?.login_signup?.login_via_password &&
+              <>
+              {
+                auth.tenantDetails?.template_configs[0]?.config?.home?.header?.login_signup?.login_via_voice_otp &&
               <p style={{
                 textAlign : 'center',
                 borderTop : '1px solid #f2f2f2',
                 padding : '10px 0'
               }}>Or</p>
+             }
               <PasswordLogin
                 controls={controls}
                 submitHandler={loginHandler}
@@ -372,6 +381,8 @@ const Auth = (props) => {
                 loading={loading}
               />
             </>
+           }
+           </>
           )
         ) : otpScreen ? (
           <Otp
