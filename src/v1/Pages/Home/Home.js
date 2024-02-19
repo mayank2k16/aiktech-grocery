@@ -86,10 +86,10 @@ const Home = () => {
   return (
     <div>
       <div style={{ position: "relative" }}>
-        <Banner showButton={isLoggedIn} />
-        {isLoggedIn && <Categories />}
+        { auth?.tenantDetails?.template_configs[0]?.config?.home?.banner?.images?.length!==0 && <Banner showButton={isLoggedIn} /> }
+        {isLoggedIn && auth.tenantDetails?.template_configs[0]?.config?.home?.categories && <Categories />}
         {categoryList && categoryList.length && (categoryList[0].name === "Best Sellers" || categoryList[0].name === "Best Seller") ? null : <Offers />}
-        {isLoggedIn && categoryList && categoryList.length > 0
+        {isLoggedIn && categoryList && categoryList.length > 0 && auth.tenantDetails?.template_configs[0]?.config?.home?.featured_categories
           ? categoryList.map((item, index) => {
             if (item.home_page) {
               return (
@@ -112,7 +112,7 @@ const Home = () => {
           <Foryou title={item.name} id={index} pk={item.id}/>
         )): null}
         {/* <Install /> */}
-        <WhyShop />
+        {auth.tenantDetails?.template_configs[0]?.config?.home?.why_us && <WhyShop /> }
         {/* <Help /> */}
       </div>
       {/* <Modal show={modal} onClose={hideWelcomeModal}>

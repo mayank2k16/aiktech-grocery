@@ -42,6 +42,7 @@ export default function Navigation() {
     };
 
     useEffect(() => {
+        dispatch(actionsCreator.FETCH_TENANT_DETAILS())
         if (isLoggedIn) {
             fetchUserDetails();
         }
@@ -125,6 +126,13 @@ export default function Navigation() {
                 document.querySelector(".navbar-search").value = "";
         }
     }, [overlayOpen]);
+    useEffect(() => {
+        const fevicon = auth.tenantDetails?.logo ;
+        const title = auth.tenantDetails?.title || 'Grocery';
+
+        document.getElementById('websiteFevicon').setAttribute('href', fevicon);
+        document.getElementById('websiteTitle').innerText = title;
+    }, [auth])
 
     return (
         <>
@@ -133,7 +141,7 @@ export default function Navigation() {
                 removeLoginPopup={removeLoginPopup}
                 search={searchTermHandler}
             />
-            {search !== "" && showSearchResults ? (
+            {search !== "" && showSearchResults && auth.tenantDetails?.template_configs[0]?.config?.home?.header?.searchbar ? (
                 <div ref={searchRef}>
                     <SearchResults
                         fetchMoreItems={() => scrollToEnd()}

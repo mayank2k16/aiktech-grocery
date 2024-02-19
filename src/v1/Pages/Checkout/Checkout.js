@@ -41,6 +41,7 @@ export default function Checkout() {
     auth: { isLoggedIn = false },
     payment,
   } = useSelector(mapStateToProps);
+  const {auth} = useSelector(mapStateToProps)
   const {walletBalance = 0,isWallet = false} = payment
   const [selectedAddress, setSelectedAddress] = useState();
   const [mode_of_payment, setModeOfPayment] = useState();
@@ -62,6 +63,8 @@ export default function Checkout() {
     status: null,
     payment_id: null,
   });
+  const [deliveryDate, setDeliveryDate] = useState("");
+  const [deliveryTime, setDeliveryTime] = useState("");
   //   console.log(cartData);
   cartData.out_of_stock = outOfStock
   const { cartitem = [], delivery_charge, default_delivery_charge, previous_delivery_charge, transactionDebit, start_time } = cartData;
@@ -419,6 +422,12 @@ export default function Checkout() {
         order_list: modifiedCartItems,
         mode_of_payment: mode_of_payment,
       };
+      if(deliveryDate!==""){
+        payload["deliveryDate"]=deliveryDate
+      }
+      if(deliveryTime!==""){
+        payload["deliveryTime"]=deliveryTime
+      }
 
       try {
         fetchCartDetails()
@@ -599,6 +608,10 @@ export default function Checkout() {
                 updateAddress={updateAddress}
                 selectedAddress={selectedAddress}
                 newAddress={newAddress}
+                deliveryDate={deliveryDate}
+                deliveryTime={deliveryTime}
+                setDeliveryDate={setDeliveryDate}
+                setDeliveryTime={setDeliveryTime}
               />
             )}
           </div>
