@@ -32,9 +32,9 @@ const Banner = (props) => {
         <img src={blob2} alt="" className="blob2" />
         <div className="banner-text">
           <h2 className="banner-head">
-            Get Groceries Delivered In Just Minutes.
+            {auth?.tenantDetails?.template_configs[0]?.config?.home?.banner?.images?.length!==0 && auth?.tenantDetails?.template_configs[0]?.config?.home?.banner?.images[0]?.text }
           </h2>
-          <p>Free Delivery on every through website</p>
+          <p>{auth?.tenantDetails?.template_configs[0]?.config?.home?.banner?.images?.length!==0 && auth?.tenantDetails?.template_configs[0]?.config?.home?.banner?.images[0]?.description}</p>
           <br />
           {!props.showButton && (
             <Button
@@ -50,7 +50,8 @@ const Banner = (props) => {
           </div>
         </div>
 
-        <img src={deliveryManImg} alt="404NotFound" className="banner-image" />
+        {/* <img src={deliveryManImg} alt="404NotFound" className="banner-image" /> */}
+        <img src={auth?.tenantDetails?.template_configs[0]?.config?.home?.banner?.images?.length!==0 && auth?.tenantDetails?.template_configs[0]?.config?.home?.banner?.images[0]?.uri} alt="404NotFound" className="banner-image" />
       </div>
       {!isLoggedIn && (
         <div className="banner-discount">

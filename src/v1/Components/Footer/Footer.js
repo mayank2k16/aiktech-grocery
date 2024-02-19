@@ -29,9 +29,7 @@ const Footer = () => {
           <div className="footer-content footer-aboutus">
             <p className="footer-head">About Us</p>
             <p>
-              Real Value Mart has been delighting customers for years.
-              Find the widest collection and get free delivery on every order.
-              Order through realvaluemart.in
+             {auth.tenantDetails?.template_configs[0]?.config?.home?.footer?.desc}
             </p>
           </div>
 
@@ -65,7 +63,7 @@ const Footer = () => {
                     target="_blank"
                     href="/privacy-policy#PhurtiDeliveryServices"
                   >
-                    Realvaluemart Delivery Services
+                    {auth.tenantDetails?.title} Delivery Services
                   </a>
                 </li>
                 <li>
@@ -114,41 +112,54 @@ const Footer = () => {
                 <li>
                   <p className="footer-head">Contact</p>
                 </li>
+                {
+             auth.tenantDetails?.template_configs[0]?.config?.home?.footer?.social_media_links?.length !==0 && auth.tenantDetails?.template_configs[0]?.config?.home?.footer?.social_media_links[0]?.facebook &&
                 <li>
                   <a
                     rel="noreferrer"
                     target="_blank"
-                    href={SOCIALMEDIA_LINKS['FACEBOOK']}
+                    href={auth.tenantDetails?.template_configs[0]?.config?.home?.footer?.social_media_links[0]?.facebook}
                   >
                     <img className="social" src={fbIcon} alt="" />
                     Facebook
                   </a>
                 </li>
+                 }
+                 {
+             auth.tenantDetails?.template_configs[0]?.config?.home?.footer?.social_media_links?.length !==0 && auth.tenantDetails?.template_configs[0]?.config?.home?.footer?.social_media_links[0]?.instagram &&
                 <li>
                   <a
                     rel="noreferrer"
                     target="_blank"
-                    href={SOCIALMEDIA_LINKS['INSTAGRAM']}
+                    href={auth.tenantDetails?.template_configs[0]?.config?.home?.footer?.social_media_links[0]?.instagram}
                   >
                     <img className="social" src={instaIcon} alt="" />
                     Instagram
                   </a>
                 </li>
+                 }
+                  {
+             auth.tenantDetails?.template_configs[0]?.config?.home?.footer?.social_media_links?.length !==0 && auth.tenantDetails?.template_configs[0]?.config?.home?.footer?.social_media_links[0]?.linkedin &&
                 <li>
                   <a
                     rel="noreferrer"
                     target="_blank"
-                    href={SOCIALMEDIA_LINKS['LINKEDIN']}
+                    href={auth.tenantDetails?.template_configs[0]?.config?.home?.footer?.social_media_links[0]?.linkedin}
                   >
                     <img className="social" src={linkedinIcon} alt="" />
                     LinkedIn
                   </a>
                 </li>
+                 }
+                
+                {
+             auth.tenantDetails?.template_configs[0]?.config?.home?.footer?.contact_details?.length !==0 && auth.tenantDetails?.template_configs[0]?.config?.home?.footer?.contact_details[0]?.email &&
                 <li>
-                  <a href="mailto:ziyuzabi@gmail.com">
-                    E-mail us at <br /> ziyuzabi@gmail.com
+                  <a href={`mailto:${auth.tenantDetails?.template_configs[0]?.config?.home?.footer?.contact_details[0]?.email}`}>
+                    E-mail us at <br />  {auth.tenantDetails?.template_configs[0]?.config?.home?.footer?.contact_details[0]?.email}
                   </a>
                 </li>
+              }
               </ul>
             </div>
           </div>
@@ -200,7 +211,7 @@ const Footer = () => {
         )}
       </div>
       <hr />
-      <p>© Realvaluemart { current_year }</p>
+      <p>© {auth?.tenantDetails?.title} { current_year }</p>
     </div>
   );
 };

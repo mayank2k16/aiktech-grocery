@@ -8,6 +8,10 @@ import { useState } from "react";
 import { useEffect } from "react";
 import { toast } from "react-toastify";
 import "../CheckoutAddress/CheckoutAddress.scss";
+import { useSelector } from "react-redux";
+const mapStateToProps = ({  auth }) => ({
+  auth,
+});
 
 export default function CheckoutBill({
   cartData = {},
@@ -19,6 +23,7 @@ export default function CheckoutBill({
   // setIsWallet,
   showOptions,
 }) {
+  const {auth} = useSelector(mapStateToProps);
   const { cartitem = [], operational, delivery_charge, default_delivery_charge, previous_delivery_charge, final_item, start_time, unoperational_message, out_of_stock } = cartData;
   const formattedCartItems = sortItems(cartitem);
   const [sum, setsum] = useState(1);
@@ -132,7 +137,7 @@ export default function CheckoutBill({
           />
         );
       })}
-      {isLoggedIn && <Discount cartData={cartData} />}
+      {isLoggedIn && auth.tenantDetails?.template_configs[0]?.config?.checkout?.discounts && <Discount cartData={cartData} />}
       {subtotal(cartData)}
 
       {showOptions && (
@@ -179,7 +184,9 @@ export default function CheckoutBill({
               {walletBalance && parseFloat(walletBalance)}
             </div>
           </button>
-          <button
+          {
+            auth.tenantDetails?.template_configs[0]?.config?.checkout?.checkout_options?.cash_on_delivery &&
+            <button
             onClick={() => {
               // setIsWallet(false);
               setModeOfPayment("cash_on_delivery");
@@ -201,7 +208,7 @@ export default function CheckoutBill({
               ></div>
               Pay on Delivery
             </div>
-          </button>
+          </button>}
           {/* <button
             onClick={() => {
               // setIsWallet(false);

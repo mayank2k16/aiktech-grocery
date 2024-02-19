@@ -148,7 +148,7 @@ const Navbar = (props) => {
       <div className="bottom-container">
         <Link to="/">
              <div className="Logo">
-                <img src={logoImg} alt="Logo" />
+                <img src={auth.tenantDetails?.template_configs[0]?.config?.home?.header?.logo?.logo_uri} alt="Logo" />
               </div>
         </Link>
         {/* <div className='location '>
@@ -156,7 +156,7 @@ const Navbar = (props) => {
                     <h3>{props.location}</h3>
                 </div> */}
 
-        {isLoggedIn && (
+        {isLoggedIn && auth.tenantDetails?.template_configs[0]?.config?.home?.header?.searchbar && (
           <input
             type="text"
             placeholder="Search For Products...."

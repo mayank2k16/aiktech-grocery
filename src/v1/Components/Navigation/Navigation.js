@@ -42,6 +42,7 @@ export default function Navigation() {
     };
 
     useEffect(() => {
+        dispatch(actionsCreator.FETCH_TENANT_DETAILS())
         if (isLoggedIn) {
             fetchUserDetails();
         }
@@ -133,7 +134,7 @@ export default function Navigation() {
                 removeLoginPopup={removeLoginPopup}
                 search={searchTermHandler}
             />
-            {search !== "" && showSearchResults ? (
+            {search !== "" && showSearchResults && auth.tenantDetails?.template_configs[0]?.config?.home?.header?.searchbar ? (
                 <div ref={searchRef}>
                     <SearchResults
                         fetchMoreItems={() => scrollToEnd()}

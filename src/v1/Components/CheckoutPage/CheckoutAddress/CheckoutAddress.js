@@ -10,11 +10,24 @@ import { AddressForm, InputField } from "../..";
 import axios from "axios";
 import { errorMsg } from "../../../Utils";
 import { toast } from "react-toastify";
+import { useSelector } from "react-redux";
+
+const mapStateToProps = ({  auth }) => ({
+  auth
+});
+
 export default function CheckoutAddress({
   updateAddress,
   selectedAddress,
   newAddress,
+  setDeliveryDate,
+  setDeliveryTime,
+  deliveryDate,
+  deliveryTime
 }) {
+
+  const {auth} = useSelector(mapStateToProps);
+
   const [addresses, setAddresses] = useState([]);
   const [modal, setmodal] = useState(false);
   const [option, setOption] = useState();
@@ -52,6 +65,29 @@ export default function CheckoutAddress({
 
   const [edittedAddress, setedittedAddress] = useState("");
   const [edittingpk, setedittingpk] = useState(0);
+
+  const dateHandler=(e)=>{
+    if(e.target.value >= new Date().toISOString().split('T')[0]){
+      setDeliveryDate(e.target.value);
+    }
+    else{
+      toast.error("choose a deliverable date")
+    }
+    
+  }
+  const timeHandler=(e)=>{
+    if(deliveryDate === new Date().toISOString().split('T')[0]){
+      // if (Number(e.target.value.split(":")[0]) < new Date().getHours()){
+      //   toast.error("choose deliverable time")
+      // }
+      // else{
+        setDeliveryTime(e.target.value);
+      // }
+    }
+    else{
+      setDeliveryTime(e.target.value);
+    }
+  }
 
   const editAddress = async (pk, address) => {
     try {
@@ -176,6 +212,16 @@ export default function CheckoutAddress({
                     Payment
                 </span> */}
       </div>
+      { 
+     auth.tenantDetails?.template_configs[0]?.config?.checkout?.delivery_options?.scheduled &&
+     <div className="flex flex-col gap-075rem">
+            <span
+              className="text-medium text-bold-lg"
+            >Schedule Delivery</span>
+            <InputField type="date" onChange={dateHandler} value={deliveryDate}/>
+            <InputField type="time" onChange={timeHandler} value={deliveryTime}/>
+      </div>
+      }
       <h5>ADDRESSES</h5>
 
       {addresses && addresses.length > 0  ? (
