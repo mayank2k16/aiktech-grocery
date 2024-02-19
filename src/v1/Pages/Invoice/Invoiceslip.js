@@ -1,19 +1,25 @@
 import React, { useState, useEffect } from 'react'
 import './Invoice.scss';
+import { useSelector } from 'react-redux';
 
-
-
+const mapStateToProps = ({  auth }) => ({
+    auth
+  });
 
 export default function Invoiceslip({ id, invoice }) {
     
     const { data: invoiceDetails = {}, items: invoiceitem = [], final_delivery_charge = 0, packaging_charge = 0, promotional_discount, default_delivery_charge = 0 } = invoice || {}
     const { invoice_id, final_price = 0 } = invoiceDetails || {};
+    const {auth} = useSelector(mapStateToProps)
 
     
     return (
         <div className="invoice-details" id='invoice'>
             <div className="item-details">
-                <h5 className="small_headline fill-color">GST-NO:- 29AAMCP1530D1ZK</h5>
+                <h5 className="small_headline fill-color">GST-NO:- {auth.tenantDetails.business_details && 
+                        auth.tenantDetails.business_details.hasOwnProperty("gst")
+                        ? auth.tenantDetails.business_details["gst"]
+                        : "N/A"}</h5>
                 <h5 className="small_headline fill-color">#{invoice_id}</h5>
                 <div className="b-top w-100 mt-4"></div>
                 <div className="table-wrapper">
