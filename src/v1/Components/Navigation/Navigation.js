@@ -126,6 +126,13 @@ export default function Navigation() {
                 document.querySelector(".navbar-search").value = "";
         }
     }, [overlayOpen]);
+    useEffect(() => {
+        const fevicon = auth.tenantDetails?.logo ;
+        const title = auth.tenantDetails?.title || 'Grocery';
+
+        document.getElementById('websiteFevicon').setAttribute('href', fevicon);
+        document.getElementById('websiteTitle').innerText = title;
+    }, [auth])
 
     return (
         <>
